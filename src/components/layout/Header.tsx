@@ -1,12 +1,13 @@
 import { useMemo } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import Form from "./Form";
 
 export default function Header() {
   const { pathname } = useLocation();
   const isHome = useMemo(() => pathname === '/', [pathname]);
 
   return (
-    <header className={` ${isHome ? 'bg-[url(/bg.jpg)] bg-cover bg-center h-[850px]' : 'bg-slate-800'}`}>
+    <header className={` ${isHome ? 'bg-[url(/bg.jpg)] bg-cover bg-center' : 'bg-slate-800'}`}>
       <div className="container mx-auto py-16 px-10">
         <div className=" flex justify-between items-center">
           <div className="w-32">
@@ -30,6 +31,8 @@ export default function Header() {
             </nav>
           </div>
         </div>
+
+        <Form />
       </div>
     </header >
   )
