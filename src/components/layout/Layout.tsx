@@ -1,22 +1,32 @@
-import { Link, Outlet } from "react-router-dom";
+import { useMemo } from "react";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 
 export default function Layout() {
+  const { pathname } = useLocation();
+  const isHome = useMemo(() => pathname === '/', [pathname]);
+
   return (
     <>
-      <header className="bg-slate-800 py-16">
+      <header className={`py-16 ${isHome ? 'bg-[url(/logo.svg)] h-[850px]' : 'bg-slate-800'}`}>
         <div className="container flex justify-between items-center">
           <div className="w-32">
             <img src="/logo.svg" alt="" />
           </div>
           <div>
             <nav className="space-x-4">
-              <Link to="/" className="text-white font-semibold uppercase">
+              <NavLink
+                to="/"
+                className={({ isActive }) => isActive ? 'text-orange-500 uppercase font-bold' : 'text-white uppercase font-bold'}
+              >
                 Inicio
-              </Link>
+              </NavLink>
 
-              <Link to="/favorites" className="text-white font-semibold uppercase">
+              <NavLink
+                to="/favorites"
+                className={({ isActive }) => isActive ? 'text-orange-500 uppercase font-bold' : 'text-white uppercase font-bold'}
+              >
                 Favoritos
-              </Link>
+              </NavLink>
             </nav>
           </div>
         </div>
