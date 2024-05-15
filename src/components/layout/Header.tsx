@@ -8,7 +8,7 @@ export default function Header() {
 
   return (
     <header className={` ${isHome ? 'bg-[url(/bg.jpg)] bg-cover bg-center' : 'bg-slate-800'}`}>
-      <div className="container mx-auto py-16 px-10">
+      <div className="container mx-auto py-16 px-5">
         <div className=" flex justify-between items-center">
           <div className="w-32">
             <img src="/logo.svg" alt="" />
@@ -32,7 +32,9 @@ export default function Header() {
           </div>
         </div>
 
-        <Form />
+        {
+          isHome && <Form />
+        }
       </div>
     </header >
   )
