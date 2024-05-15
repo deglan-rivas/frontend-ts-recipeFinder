@@ -48,9 +48,9 @@ export default function Form({ setRecipes }: FormProps) {
 
     if (Object.values(search).includes("")) {
       toast({
-        // title: "Error",
-        // description: "Todos los campos son obligatorios",
-        // variant: "destructive",
+        title: "Error",
+        description: "Todos los campos son obligatorios",
+        variant: "destructive",
       })
       return
     }
