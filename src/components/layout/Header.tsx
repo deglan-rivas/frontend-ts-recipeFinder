@@ -1,8 +1,14 @@
-import { useMemo } from "react";
+import { Recipe } from "@/types";
+import { Dispatch, SetStateAction, useMemo } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import Form from "./Form";
 
-export default function Header() {
+interface HeaderProps {
+  recipes: Recipe[]
+  setRecipes: (Dispatch<SetStateAction<Recipe[]>>)
+}
+
+export default function Header({ recipes, setRecipes }: HeaderProps) {
   const { pathname } = useLocation();
   const isHome = useMemo(() => pathname === '/', [pathname]);
 
@@ -33,7 +39,11 @@ export default function Header() {
         </div>
 
         {
-          isHome && <Form />
+          isHome &&
+          <Form
+            recipes={recipes}
+            setRecipes={setRecipes}
+          />
         }
       </div>
     </header >
