@@ -18,7 +18,7 @@ export default function Home({ recipes, addFavorite, deleteFavorite, favorites }
 
         {
           recipes.length ? (
-            <div className="w-full flex flex-wrap justify-between items-center gap-y-5">
+            <div className="w-full flex flex-wrap justify-start items-center gap-5">
               {recipes.map((recipe) => (
                 <Card key={recipe.idDrink} recipe={recipe} addFavorite={addFavorite} deleteFavorite={deleteFavorite} favorites={favorites} />
               ))}

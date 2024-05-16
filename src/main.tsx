@@ -38,7 +38,7 @@ export function AppRouter() {
       <Routes>
         <Route element={<Layout recipes={recipes} setRecipes={setRecipes} />}>
           <Route path='/' index element={<Home recipes={recipes} addFavorite={addFavorite} deleteFavorite={deleteFavorite} favorites={favorites} />} />
-          <Route path='/favorites' element={<Favorites favorites={favorites} />} />
+          <Route path='/favorites' element={<Favorites favorites={favorites} addFavorite={addFavorite} deleteFavorite={deleteFavorite} />} />
         </Route>
       </Routes>
     </BrowserRouter>

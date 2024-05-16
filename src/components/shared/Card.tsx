@@ -90,7 +90,10 @@ function RecipeDialog({ isOpen, setIsOpen, recipe, addFavorite, deleteFavorite, 
               Cerrar
             </button>
             <button className="w-full bg-orange-400 hover:bg-orange-500 cursor-pointer text-center py-2 uppercase text-white font-semibold rounded-md"
-              onClick={() => isIncluded ? deleteFavorite(recipe.idDrink) : addFavorite(recipe)}
+              onClick={() => {
+                isIncluded ? deleteFavorite(recipe.idDrink) : addFavorite(recipe)
+                setIsOpen(false)
+              }}
             >
               {
                 isIncluded ? "Eliminar Favorito" : "Agregar Favorito"
