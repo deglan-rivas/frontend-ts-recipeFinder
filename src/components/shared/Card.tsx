@@ -1,13 +1,19 @@
 import { RecipeIngredientsSchema } from "@/schemas";
 import { Recipe, RecipeIngredients } from "@/types";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useMemo, useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 
-function RecipeDialog({ isOpen, setIsOpen, idDrink }: { isOpen: boolean, setIsOpen: Dispatch<SetStateAction<boolean>>, idDrink: Recipe['idDrink'] }) {
+interface RecipeDialogProps extends CardProps {
+  isOpen: boolean
+  setIsOpen: Dispatch<SetStateAction<boolean>>
+}
+
+function RecipeDialog({ isOpen, setIsOpen, recipe, addFavorite, deleteFavorite, favorites }: RecipeDialogProps) {
   const [recipeModal, setRecipeModal] = useState<RecipeIngredients>({} as RecipeIngredients)
+  const isIncluded = useMemo(() => favorites.some((favorite) => favorite.idDrink === recipe.idDrink), [favorites, recipe.idDrink])
 
   const openCloseModal = async () => {
-    const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idDrink}`
+    const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${recipe.idDrink}`
     try {
       if (!isOpen) {
         const data = await fetch(url).then(res => res.json())
@@ -59,12 +65,12 @@ function RecipeDialog({ isOpen, setIsOpen, idDrink }: { isOpen: boolean, setIsOp
                   )
                 ))
               }
-              <li className="text-lg">
+              {/* <li className="text-lg">
                 {recipeModal.strMeasure1} - {recipeModal.strIngredient1}
               </li>
               <li className="text-lg">
                 {recipeModal.strMeasure2} - {recipeModal.strIngredient2}
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -83,8 +89,12 @@ function RecipeDialog({ isOpen, setIsOpen, idDrink }: { isOpen: boolean, setIsOp
             >
               Cerrar
             </button>
-            <button className="w-full bg-orange-400 hover:bg-orange-500 cursor-pointer text-center py-2 uppercase text-white font-semibold rounded-md">
-              Agregar a Favoritos
+            <button className="w-full bg-orange-400 hover:bg-orange-500 cursor-pointer text-center py-2 uppercase text-white font-semibold rounded-md"
+              onClick={() => isIncluded ? deleteFavorite(recipe.idDrink) : addFavorite(recipe)}
+            >
+              {
+                isIncluded ? "Eliminar Favorito" : "Agregar Favorito"
+              }
             </button>
           </div>
         </div>
@@ -93,7 +103,14 @@ function RecipeDialog({ isOpen, setIsOpen, idDrink }: { isOpen: boolean, setIsOp
   )
 }
 
-export default function Card({ recipe }: { recipe: Recipe }) {
+interface CardProps {
+  recipe: Recipe
+  addFavorite: (recipe: Recipe) => void
+  deleteFavorite: (idDrink: Recipe['idDrink']) => void
+  favorites: Recipe[]
+}
+
+export default function Card({ recipe, addFavorite, deleteFavorite, favorites }: CardProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -106,7 +123,10 @@ export default function Card({ recipe }: { recipe: Recipe }) {
         <RecipeDialog
           isOpen={isOpen}
           setIsOpen={setIsOpen}
-          idDrink={recipe.idDrink}
+          recipe={recipe}
+          addFavorite={addFavorite}
+          deleteFavorite={deleteFavorite}
+          favorites={favorites}
         />
       </div>
     </div>

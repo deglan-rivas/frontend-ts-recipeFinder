@@ -9,6 +9,10 @@ import { Recipe } from './types';
 
 export function AppRouter() {
   const [recipes, setRecipes] = useState<Recipe[]>([])
+  const [favorites, setFavorites] = useState<Recipe[]>([])
+
+  const addFavorite = (recipe: Recipe) => setFavorites([...favorites, recipe])
+  const deleteFavorite = (idDrink: Recipe['idDrink']) => setFavorites(favorites.filter(favorite => favorite.idDrink !== idDrink))
 
   // return createBrowserRouter([
   //   {
@@ -33,8 +37,8 @@ export function AppRouter() {
     <BrowserRouter>
       <Routes>
         <Route element={<Layout recipes={recipes} setRecipes={setRecipes} />}>
-          <Route path='/' index element={<Home recipes={recipes} />} />
-          <Route path='/favorites' element={<Favorites />} />
+          <Route path='/' index element={<Home recipes={recipes} addFavorite={addFavorite} deleteFavorite={deleteFavorite} favorites={favorites} />} />
+          <Route path='/favorites' element={<Favorites favorites={favorites} />} />
         </Route>
       </Routes>
     </BrowserRouter>

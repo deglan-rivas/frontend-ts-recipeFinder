@@ -3,9 +3,12 @@ import { Recipe } from "@/types";
 
 interface HomeProps {
   recipes: Recipe[]
+  addFavorite: (recipe: Recipe) => void
+  deleteFavorite: (idDrink: Recipe['idDrink']) => void
+  favorites: Recipe[]
 }
 
-export default function Home({ recipes }: HomeProps) {
+export default function Home({ recipes, addFavorite, deleteFavorite, favorites }: HomeProps) {
   return (
     <>
       <div className="space-y-10">
@@ -17,7 +20,7 @@ export default function Home({ recipes }: HomeProps) {
           recipes.length ? (
             <div className="w-full flex flex-wrap justify-between items-center gap-y-5">
               {recipes.map((recipe) => (
-                <Card key={recipe.idDrink} recipe={recipe} />
+                <Card key={recipe.idDrink} recipe={recipe} addFavorite={addFavorite} deleteFavorite={deleteFavorite} favorites={favorites} />
               ))}
             </div>
           ) : (
