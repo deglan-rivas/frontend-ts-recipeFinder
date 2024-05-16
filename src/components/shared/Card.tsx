@@ -78,7 +78,9 @@ function RecipeDialog({ isOpen, setIsOpen, idDrink }: { isOpen: boolean, setIsOp
           </div>
 
           <div className="flex justify-between gap-5 mt-5">
-            <button className="w-full bg-gray-500 hover:bg-gray-600 cursor-pointer text-center py-2 uppercase text-white font-semibold rounded-md">
+            <button className="w-full bg-gray-500 hover:bg-gray-600 cursor-pointer text-center py-2 uppercase text-white font-semibold rounded-md"
+              onClick={() => setIsOpen(false)}
+            >
               Cerrar
             </button>
             <button className="w-full bg-orange-400 hover:bg-orange-500 cursor-pointer text-center py-2 uppercase text-white font-semibold rounded-md">
