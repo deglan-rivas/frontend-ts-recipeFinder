@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './components/layout/Layout';
@@ -9,7 +9,11 @@ import { Recipe } from './types';
 
 export function AppRouter() {
   const [recipes, setRecipes] = useState<Recipe[]>([])
-  const [favorites, setFavorites] = useState<Recipe[]>([])
+  const [favorites, setFavorites] = useState<Recipe[]>(JSON.parse(localStorage.getItem('favorites') || '[]'))
+
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites))
+  }, [favorites])
 
   const addFavorite = (recipe: Recipe) => setFavorites([...favorites, recipe])
   const deleteFavorite = (idDrink: Recipe['idDrink']) => setFavorites(favorites.filter(favorite => favorite.idDrink !== idDrink))
