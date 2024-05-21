@@ -117,7 +117,7 @@ export default function Card({ recipe, addFavorite, deleteFavorite, favorites }:
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="basis-auto sm:basis-[49%] lg:basis-[32%] border shadow-lg">
+    <div className="basis-auto sm:basis-[48%] lg:basis-[32%] border shadow-lg">
       <div className="overflow-hidden">
         <img loading="lazy" src={recipe.strDrinkThumb} alt={recipe.strDrink} className="hover:rotate-6 hover:scale-125 transition-transform" />
       </div>
