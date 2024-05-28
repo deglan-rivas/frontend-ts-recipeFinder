@@ -9,8 +9,14 @@
 ## 📜 Description
 
 - Due to its practicality, **Vite** was chosen to initialize, minify, and create the production *bundle*.
+- **TypeScript** was employed to enhance code quality with static typing and improved developer tooling.
 - **React**, **TailwindCSS** were used to quickly layout complex components.
+- **ShadcnUI** was utilized for providing a set of accessible and customizable UI components based on *Tailwind*.
+- **Zod** was used for schema validation to ensure the correctness of data structures.
+- **React-router-dom** was employed to handle routing within the React application, enabling navigation between different components and views.
 - The project is deployed on [**Netlify**](https://bespoke-haupia-b6aac1.netlify.app/). Additionally, the final code is dockerized for local testing.
+- **Update1 - release/migrate_zustand**: Implemented Zustand for state management to handle complex application states efficiently.
+- **Update2 - release/add_testing**: Added testing frameworks **React Testing Library**, **Jest**, and **Mock Service Worker** for unit and integration testing.
 
 ## 🚀 Getting Started
 
